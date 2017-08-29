@@ -8,13 +8,14 @@ package woordenapplicatie.gui;
 
 
 
-import java.net.URL;
-import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+
+import java.net.URL;
+import java.util.ResourceBundle;
 
 /**
  * FXML Controller class
@@ -30,7 +31,7 @@ public class WoordenController implements Initializable {
                                                 "\n" +
                                                 "Heb je dan geen hoedje meer\n" +
                                                 "Maak er één van bordpapier\n" +
-                                                "Eén, twee, drie, vier\n" +
+                                                "Een, twee, drie, vier\n" +
                                                 "Hoedje van papier\n" +
                                                 "\n" +
                                                 "Een, twee, drie, vier\n" +
@@ -56,19 +57,23 @@ public class WoordenController implements Initializable {
     @FXML
     private TextArea taOutput;
 
+    Counter counter;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         taInput.setText(DEFAULT_TEXT);
+        counter = new Counter(DEFAULT_TEXT);
     }
     
     @FXML
     private void aantalAction(ActionEvent event) {
-         throw new UnsupportedOperationException("Not supported yet."); 
+     taOutput.setText("Totaal aantal woorden: " + counter.countAll() + "\n" + "Aantal verschillende woorden: " + counter.countUnique());
+
     }
 
     @FXML
     private void sorteerAction(ActionEvent event) {
-         throw new UnsupportedOperationException("Not supported yet."); 
+     taOutput.setText(String.valueOf(counter.countSort()));
     }
 
     @FXML
