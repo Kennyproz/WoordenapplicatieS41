@@ -31,7 +31,7 @@ public class WoordenController implements Initializable {
                                                 "\n" +
                                                 "Heb je dan geen hoedje meer\n" +
                                                 "Maak er één van bordpapier\n" +
-                                                "Een, twee, drie, vier\n" +
+                                                "Eén, twee, drie, vier\n" +
                                                 "Hoedje van papier\n" +
                                                 "\n" +
                                                 "Een, twee, drie, vier\n" +
@@ -73,17 +73,17 @@ public class WoordenController implements Initializable {
 
     @FXML
     private void sorteerAction(ActionEvent event) {
-     taOutput.setText(String.valueOf(counter.countSort()));
+     taOutput.setText(String.valueOf(counter.countSortDesc()));
     }
 
     @FXML
     private void frequentieAction(ActionEvent event) {
-         throw new UnsupportedOperationException("Not supported yet."); 
+         taOutput.setText(String.valueOf(counter.countFrequent()));
     }
 
     @FXML
     private void concordatieAction(ActionEvent event) {
-         throw new UnsupportedOperationException("Not supported yet."); 
+         taOutput.setText(String.valueOf(counter.locationWords()));
     }
    
 }

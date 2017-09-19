@@ -8,12 +8,15 @@ import java.util.*;
 public class Counter {
 
     String woorden[];
+    String defaultWords;
     HashSet<String> set;
 
-    public Counter(String woorden) {
-        this.woorden = woorden.toLowerCase().split("\\W+");
-        set = new HashSet<String>(Arrays.asList(woorden.toLowerCase().split("\\W+")));
+    public Counter(String words) {
+        this.woorden = words.toLowerCase().replace("é","e").split("\\W+");
+        this.defaultWords = words.toLowerCase().replace("é","e");
+        set = new HashSet<String>(Arrays.asList(words.toLowerCase().split("\\W+")));
     }
+
 
     public int countAll(){
         return woorden.length;
@@ -23,12 +26,56 @@ public class Counter {
         return set.size();
      }
 
-     public String countSort (){
+     public String countSortDesc(){
          TreeSet<String> desendingSet = new TreeSet<>(set);
          return desendingSet.descendingSet().toString();
      }
-   /*  public String countFrequent(){
-         TreeMap<String, Integer> = new TreeMap<String,Integer>();
+
+    public String countFrequent(){
+         Map<String, Integer> map = new TreeMap<>();
+         Map<Integer,Set<String>> sortedMap = new TreeMap<>();
+         for (String word : woorden){
+             Integer w = map.get(word);
+             if (w == null){
+                w = 1;
+             }
+             else{
+                 w++;
+             }
+             map.put(word,w);
+
+         }
+       /*  for (Map.Entry<String,Integer> ksv : map.entrySet()){
+            sortedMap.put(ksv.getValue(), ksv.getKey());
+         }*/
+         return  map.toString().replace("=",": ");
+
+      }
+
+
+     public String locationWords() {
+
+         TreeMap<String, Set<Integer>> map = new TreeMap<>();
+         String[] lines = defaultWords.split("\\n");
+
+         int currentLine = 1;
+
+         for (String line : lines) {
+             String[] words = line.split("\\W+");
+             for (String word : words) {
+                 if (!word.equals("")) {
+                     if (!map.containsKey(word)) {
+                         int count = currentLine;
+                         map.put(word, new TreeSet() {{
+                             add(count);
+                         }});
+                     } else {
+                         map.get(word).add(currentLine);
+                     }
+                 }
+             }
+             currentLine++;
+         }
+         return map.toString();
      }
-*/
 }
