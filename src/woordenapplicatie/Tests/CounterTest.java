@@ -3,6 +3,11 @@ package woordenapplicatie.Tests;
 import org.junit.jupiter.api.Assertions;
 import woordenapplicatie.gui.Counter;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
+
 /**
  * Created by Ken on 2-9-2017.
  */
@@ -37,22 +42,45 @@ class CounterTest {
     void countSortDesc() {
         testString = "Alpha Bee Csharp Dozen Equal";
         counter = new Counter(testString);
-        Assertions.assertEquals("[equal, dozen, csharp, bee, alpha]",counter.countSortDesc());
+        TreeSet<String> desendingSet = new TreeSet<>();
+        desendingSet.add("Equal, Dozen, Csharp, Bee, Alpha");
+        Assertions.assertEquals(desendingSet.descendingSet().toString().toLowerCase(),counter.countSortDesc());
 
         testString = "Alpha Equal Dozen Csharp Bee";
         counter = new Counter(testString);
-        Assertions.assertEquals("[equal, dozen, csharp, bee, alpha]",counter.countSortDesc());
+        Assertions.assertEquals(desendingSet.descendingSet().toString().toLowerCase(),counter.countSortDesc());
     }
 
     @org.junit.jupiter.api.Test
     void countFrequent(){
         testString = "One Two Two Three Three Three";
         counter = new Counter(testString);
-        Assertions.assertEquals("{one: 1, two: 2, three: 3}",counter.countFrequent());
+        TreeMap<Integer, Set<String>> testmap = new TreeMap();
+        Set strings = new HashSet();
+        strings.add("One");
+        testmap.put(1,strings);
+        strings = new HashSet();
+        strings.add("Two");
+        testmap.put(2,strings);
+        strings = new HashSet();
+        strings.add("Three");
+        testmap.put(3,strings);
+
+        Assertions.assertEquals(testmap.toString().toLowerCase().replace("=",": "),counter.countFrequent());
+
 
         testString = "One Two Three Three";
         counter = new Counter(testString);
-        Assertions.assertEquals("{one: 1, two: 1, three: 2}",counter.countFrequent());
+        testmap = new TreeMap();
+        strings = new HashSet();
+        strings.add("One");
+        strings.add("Two");
+        testmap.put(1,strings);
+        strings = new HashSet();
+        strings.add("Three");
+        testmap.put(2,strings);
+        Assertions.assertEquals(testmap.toString().toLowerCase().replace("=",": "),counter.countFrequent());
+
     }
 
 

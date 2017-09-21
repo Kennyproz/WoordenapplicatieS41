@@ -45,10 +45,19 @@ public class Counter {
              map.put(word,w);
 
          }
-       /*  for (Map.Entry<String,Integer> ksv : map.entrySet()){
-            sortedMap.put(ksv.getValue(), ksv.getKey());
-         }*/
-         return  map.toString().replace("=",": ");
+         for (Map.Entry<String,Integer> ksv : map.entrySet()){
+             Integer intKey = ksv.getValue();
+             Set<String> stringSet = sortedMap.get(intKey);
+             if (stringSet == null){
+                 stringSet = new HashSet<>();
+                 stringSet.add(ksv.getKey());
+                 sortedMap.put(ksv.getValue(), stringSet);
+             }
+             else {
+                 sortedMap.get(intKey).add(ksv.getKey());
+             }
+         }
+         return  sortedMap.toString().replace("=",": ");
 
       }
 
