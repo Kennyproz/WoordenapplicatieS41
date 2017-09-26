@@ -36,14 +36,7 @@ public class Counter {
          Map<Integer,Set<String>> sortedMap = new TreeMap<>();
          for (String word : woorden){
              Integer w = map.get(word);
-             if (w == null){
-                w = 1;
-             }
-             else{
-                 w++;
-             }
-             map.put(word,w);
-
+             map.put(word, (w == null) ? 1 : w+1 );
          }
          for (Map.Entry<String,Integer> ksv : map.entrySet()){
              Integer intKey = ksv.getValue();
